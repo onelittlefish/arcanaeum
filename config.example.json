@@ -1,0 +1,16 @@
+{
+    "db": {
+        "url": "mongodb://localhost/books"
+    },
+    "httpServer": {
+        "baseUrl": "http://example.com:8080",
+        "port": 8080,
+        "sessionSecret": "this-is-a-secret"
+    },
+    "auth": {
+        "google": {
+            "clientID": "google-client-id",
+            "clientSecret": "google-client-secret"
+        }
+    }
+}

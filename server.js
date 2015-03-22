@@ -6,16 +6,17 @@ var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 var uuid = require('node-uuid');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
+var config = require('./config.json')
 
 var Book = require('./app/models/Book');
 var User = require('./app/models/User');
 
-mongoose.connect('mongodb://localhost/books');
+mongoose.connect(config.db.url);
 
 // App config
 
-var baseUrl = 'http://localhost:8080';
+var baseUrl = config.httpServer.baseUrl;
 
 var app = express();
 app.disable('x-powered-by');
@@ -24,20 +25,22 @@ app.engine('html', hbs.__express);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({ secret: 'q)29+Bx~LGn?s?){' }));
+app.use(session({ secret: config.httpServer.sessionSecret }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || config.httpServer.port;
 
 // Passport
 
 passport.use(new GoogleStrategy({
-	returnURL: baseUrl + '/auth/google/callback',
-	realm: baseUrl
+	clientID: config.auth.google.clientID,
+	clientSecret: config.auth.google.clientSecret,
+	callbackURL: baseUrl + '/auth/google/callback',
+	passReqToCallback: true
 	},
-	function(identifier, profile, done) {
+	function(req, accessToken, refreshToken, profile, done) {
 		var email = profile.emails[0].value;
 		User.findOne({ email: email }, function(err, user) {
 			done(null, user);
@@ -53,14 +56,17 @@ passport.deserializeUser(function(user, done) {
 	done(null, user);
 });
 
-app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google', passport.authenticate('google', {
+	scope: [
+		'https://www.googleapis.com/auth/plus.login',
+		'https://www.googleapis.com/auth/plus.profile.emails.read'
+	]
+}));
 
-app.get('/auth/google/callback', 
-	passport.authenticate('google', { failureRedirect: '/login' }),
-		function(req, res) {
-			// console.log('req: ' + req.user + ", " + req.isAuthenticated());
-			res.redirect('/');
-		});
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+	function(req, res) {
+		res.redirect('/');
+	});
 
 // Auth
 
@@ -77,7 +83,7 @@ var apiAuth = function(req, res, next) {
 	auth(req, function() {
 		res.sendStatus(401);
 	}, function() {
-		res.sendStatus(401);
+		res.sendStatus(403);
 	}, next);
 }
 
