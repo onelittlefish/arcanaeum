@@ -1,0 +1,50 @@
+html {
+	font-family: sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:visited {
+	color: blue;
+}
+
+a:hover {
+	color: green;
+}
+
+#content {
+	width: 900px;
+	margin: 0 auto;
+}
+
+.search {
+	width: 100%;
+}
+
+#filters .selected {
+	color: #000;
+}
+
+.books {
+	list-style-type: none;
+}
+
+.books li:hover, .books li:nth-child(even):hover {
+	cursor: pointer;
+	background-color: #aaa;
+}
+
+.books li:nth-child(even) {
+	background-color: #eee;
+}
+
+.modify {
+	display: inline-block;
+	float: right;
+}
+
+.expanded {
+	display: block;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Book Tracker</title>
+        <!-- data-main attribute tells require.js to load
+             scripts/main.js after require.js loads. -->
+        <script data-main="scripts/main" src="scripts/lib/require.js"></script>
+	    <link href="styles/root.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div id="content">
+	        <h1>Book Tracker</h1>
+
+	        <div id="logout">
+	        	<a href="/logout">Log Out</a>
+	        </div>
+
+	        <div id="search-filter">
+			    <input type="text" name="input" class="search" placeholder="Title or author">
+	        	<div id="filters">
+	        		<p><a href="#" id="all">All</a> | <a href="#" id="starred">Starred</a> | <a href="#" id="library">Library</a> | <a href="#" id="not-library">Not in Library</a></p>
+	        	</div>
+	        </div>
+	        <div>
+        		<p><a href="#" id="expand-all">Expand All</a> | <a href="#" id="collapse-all">Collapse All</a></p>
+        	</div>
+	        <div id="add"></div>
+		    <ul class="books">
+		    </ul>
+	  	</div>
+
+    </body>
+</html>
