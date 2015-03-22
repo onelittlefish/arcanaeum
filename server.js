@@ -64,25 +64,41 @@ app.get('/auth/google/callback',
 
 // Auth
 
-var auth = function(req, res, next) {
+var webAuth = function(req, res, next) {
+	auth(req, function() {
+		res.redirect('/login');
+	}, function() {
+		req.logout();
+		res.redirect('/login');
+	}, next);
+}
+
+var apiAuth = function(req, res, next) {
+	auth(req, function() {
+		res.sendStatus(401);
+	}, function() {
+		res.sendStatus(401);
+	}, next);
+}
+
+var auth = function(req, notAuthenticatedCallback, notAuthorizedCallback, nextCallback) {
 	var isAuthenticated = req.isAuthenticated();
 	var isAuthorized = isAuthenticated && req.user;
 
 	if(!isAuthenticated){
 		console.log("not authenticated");
-		res.redirect('/login');
+		notAuthorizedCallback();
 	} else if(!isAuthorized){
 		console.log("not authorized");
-		req.logout();
-		res.redirect('/login');
+		notAuthorizedCallback();
 	} else {
-		next();
+		nextCallback();
 	}
 }
 
 // Routes 
 
-app.get('/', auth, function(req, res) {
+app.get('/', webAuth, function(req, res) {
 	res.render('root', req.user);
 });
 
@@ -113,7 +129,7 @@ router.get('/', function(req, res) {
 // Resources
 
 router.route('/books')
-	.all(auth)
+	.all(apiAuth)
 	.get(function(req, res) {
 		Book.find(function(err, books) {
 			if (err) {
@@ -134,7 +150,7 @@ router.route('/books')
 	});
 
 router.route('/books/:book_id')
-	.all(auth)
+	.all(apiAuth)
 	.get(function(req, res) {
 		Book.findById(req.params.book_id, function(err, book) {
 			if (err) {
