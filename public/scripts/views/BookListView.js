@@ -15,9 +15,7 @@ define(function(require) {
 			this.$el.empty();
 			this.childViews = [];
 			var sorted = _(collection.sortBy(function(book) {
-				var author = book.get('author');
-				var title = book.get('title');
-				return author ? author.toLowerCase() : title.toLowerCase();
+				return book.sortString();
 			}));
 			sorted.each(_.bind(function(book) {
 				var bookView = new BookView({model: book});

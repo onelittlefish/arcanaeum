@@ -24,6 +24,14 @@ define(function(require) {
 			}
 			return bookString;
 		},
+		sortString: function() {
+			var author = this.get('author');
+			if (author) {
+				return author.toLowerCase().split(' ').pop();
+			} else {
+				return this.get('title').toLowerCase();
+			}
+		},
 		searchString: function() {
 			var searchString = this.get('title') + ' ' + this.get('author');
 			return encodeURIComponent(searchString);
