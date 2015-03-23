@@ -5,30 +5,50 @@
         <!-- data-main attribute tells require.js to load
              scripts/main.js after require.js loads. -->
         <script data-main="scripts/main" src="scripts/lib/require.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 	    <link href="styles/root.css" rel="stylesheet">
     </head>
     <body>
 
         <div id="content">
-	        <h1>Arcanaeum</h1>
-
 	        <div id="logout">
 	        	<a href="/logout">Log Out</a>
 	        </div>
 
+	        <h1>Arcanaeum</h1>
+
 	        <div id="search-filter">
-			    <input type="text" name="input" class="search" placeholder="Title or author">
-	        	<div id="filters">
-	        		<p><a href="#" id="all">All</a> | <a href="#" id="starred">Starred</a> | <a href="#" id="library">Library</a> | <a href="#" id="not-library">Not in Library</a></p>
-	        	</div>
+			    <input type="text" name="input" class="search" placeholder="Title or author...">
+
+			    <div id="actions">
+		        	<div id="filters">
+		        		<p>Show:
+		        			<a href="#" id="all" class="selected">All</a>
+		        			<a href="#" id="starred">Starred</a>
+		        			<a href="#" id="library">Library</a>
+		        			<a href="#" id="not-library">Not in Library</a>
+		        		</p>
+		        	</div>
+
+			        <div id="expand-collapse">
+		        		<a href="#" id="expand-all">Expand All</a>
+		        		<a href="#" id="collapse-all">Collapse All</a>
+		        	</div>
+		        </div>
 	        </div>
-	        <div>
-        		<p><a href="#" id="expand-all">Expand All</a> | <a href="#" id="collapse-all">Collapse All</a></p>
-        	</div>
+
 	        <div id="add"></div>
-		    <ul class="books">
-		    </ul>
-	  	</div>
+			    <div class="books">
+			    	<!-- <div class="book">
+			    		<div class="star"></div>
+			    		<div class="title">Title</div>
+			    		<div class="author">Author</div>
+			    		<div class="inLibrary">In Library</div>
+			    		<div class="librarySection">Section</div>
+			    	</div> -->
+			    </div>
+		    </div>
+	    </div>
 
     </body>
 </html>

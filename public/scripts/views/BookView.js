@@ -3,9 +3,9 @@ define(function(require) {
 	var BookEditView = require('./BookEditView');
 
 	var BookView = Backbone.View.extend({
-		tagName: 'li',
+		tagName: 'div',
 		events: {
-			'click .starred' : 'toggleStarred',
+			'click .star' : 'toggleStarred',
 			'click .edit': 'edit',
 			'click .delete': 'delete',
 			'click': 'toggleExpanded'
@@ -23,8 +23,15 @@ define(function(require) {
 			this.render();
 		},
 		render: function() {
+			this.$el.empty();
 			this.$el.addClass('book');
-			this.$el.html('<span class="modify"><a href="#" class="starred">' + (this.model.get('isStarred') ? 'starred' : 'unstarred') + '</a> | <a href="#" class="edit">edit</a> | <a href="#" class="delete">delete</a></span><span>' + this.model.summary() + '</span><span class="expanded"></span>');
+			this.$el.append('<div class="star"><a href="#" class="' + (this.model.get('isStarred') ? 'starred' : 'unstarred') + '"</a></td>');
+			this.$el.append('<div class="title">' + this.model.get('title') + '</div>');
+			this.$el.append('<div class="author">' + this.model.get('author') + '</div>');
+			this.$el.append('<div class="inLibrary ' + (this.model.get('libraryInfo').get('isAvailable') ? 'checkmark' : '') + '"></div>');
+			this.$el.append('<div class="librarySection">' + this.model.get('libraryInfo').get('section') + '</div>');
+			this.$el.append('<div class="modify"><a href="#" class="edit">edit</a> | <a href="#" class="delete">delete</a></div>');
+			this.$el.append('<div class="expanded"></div>');
 			this.detailView = new BookDetailView({model: this.model, el: this.$('.expanded')});
 			this.detailView.$el.toggle(this.expanded);
 			return this;

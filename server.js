@@ -8,6 +8,7 @@ var uuid = require('node-uuid');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var config = require('./config.json')
+var lessMiddleware = require('less-middleware');
 
 var Book = require('./app/models/Book');
 var User = require('./app/models/User');
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(session({ secret: config.httpServer.sessionSecret }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(lessMiddleware(__dirname + '/public'));
 app.use(express.static(__dirname + '/public'));
 
 var port = process.env.PORT || config.httpServer.port;

@@ -14,21 +14,21 @@ define(function(require) {
 			this.render();
 		},
 		render: function() {
+			// <label for="title">Title</label> \
+			// <label for="author">Author</label> \
+			// <label for="isAvailable">Available at library?</label> \
+			// <label for="section">Section</label> \
 			this.$el.html(
 				'<form> \
 				    <fieldset> \
-				      <label for="title">Title</label> \
-				      <input type="text" name="title" value="' + (this.model.get('title') || '') + '"> \
-				      <label for="author">Author</label> \
-				      <input type="text" name="author" value="' + (this.model.get('author') || '') + '"> \
-				      <label for="isAvailable">Available at library?</label> \
-				      <input type="checkbox" name="isAvailable" value="isAvailable"' + (this.model.get('libraryInfo').get('isAvailable') ? 'checked' : '') + '> \
-				      <label for="section">Section</label> \
-				      <input type="text" name="section" value="' + (this.model.get('libraryInfo').get('section') || '') + '"> \
-				      <!-- Allow form submission with keyboard without duplicating the dialog button --> \
-				      <!-- <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> --> \
-				      <button id="submit">Save</button> \
-				      <button id="cancel">Cancel</button> \
+						<input type="text" name="title" class="title" value="' + (this.model.get('title') || '') + '"> \
+						<input type="text" name="author" class="author" value="' + (this.model.get('author') || '') + '"> \
+						<input type="checkbox" name="isAvailable" class="inLibrary" value="isAvailable"' + (this.model.get('libraryInfo').get('isAvailable') ? 'checked' : '') + '> \
+						<input type="text" name="section" class="librarySection" value="' + (this.model.get('libraryInfo').get('section') || '') + '"> \
+						<!-- Allow form submission with keyboard without duplicating the dialog button --> \
+						<!-- <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> --> \
+						<button class="submit">save</button> \
+						<button class="cancel">cancel</button> \
 				    </fieldset> \
 				  </form>'
 			);
