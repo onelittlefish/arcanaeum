@@ -24,6 +24,19 @@ define(function(require) {
 			}
 			return bookString;
 		},
+		searchString: function() {
+			var searchString = this.get('title') + ' ' + this.get('author');
+			return encodeURIComponent(searchString);
+		},
+		amazonUrl: function() {
+			return 'http://www.amazon.com/s?field-keywords=' + this.searchString();
+		},
+		goodreadsUrl: function() {
+			return 'http://www.goodreads.com/search?query=' + this.searchString();
+		},
+		libraryUrl: function() {
+			return '' + this.searchString();
+		},
 		parse: function(response){
             var libraryInfoData = response['libraryInfo'];
             response['libraryInfo'] = new LibraryInfo(libraryInfoData);

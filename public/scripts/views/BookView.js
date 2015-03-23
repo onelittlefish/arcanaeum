@@ -77,12 +77,9 @@ define(function(require) {
 			this.render();
 		},
 		render: function() {
-			var libraryInfo = this.model.get('libraryInfo');
-			if (libraryInfo && libraryInfo.get('isAvailable')) {
-				this.$el.html('Available at library' + '<br>Section: ' + libraryInfo.get('section'));
-			} else {
-				this.$el.html('Unavailable');				
-			}
+			this.$el.append('<a href="' + this.model.amazonUrl() + '">Amazon</a> | ');
+			this.$el.append('<a href="' + this.model.goodreadsUrl() + '">Goodreads</a> | ');
+			this.$el.append('<a href="' + this.model.libraryUrl() + '">Library</a>');
 		}
 	});
 
