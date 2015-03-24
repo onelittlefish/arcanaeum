@@ -1,6 +1,6 @@
-# BookTracker
+# Arcanaeum
 
-An application to keep track of my To Read list.
+Keep track of books to read
 
 ## Running
 ```
