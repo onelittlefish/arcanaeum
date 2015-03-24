@@ -41,7 +41,8 @@ define(function(require) {
 				}
 				var newBook = new Book({title: title, author: author});
 
-				this.$('#add').html('<div></div>')
+				this.$('#add').html('<div></div>');
+				this.$('#add').addClass('editing');
 				
 				this.editView = new BookEditView({model: newBook, el: this.$('#add div')});
 				
@@ -49,17 +50,20 @@ define(function(require) {
 				this.listenTo(this.editView, 'saved', this.editSaved);
 			} else {
 				this.$('#add').empty();
+				this.$('#add').removeClass('editing');
 			}
 		},
 		editCancelled: function() {
 			this.editView.remove();
 			this.editView = null;
+			this.$('#add').removeClass('editing');
 		},
 		editSaved: function() {
 			this.collection.add(this.editView.model);
 			
 			this.editView.remove();
 			this.editView = null;
+			this.$('#add').removeClass('editing');
 
 			this.searchFilterView.clearSearchValue();
 		},

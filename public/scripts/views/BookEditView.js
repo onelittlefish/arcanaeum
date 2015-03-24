@@ -4,13 +4,15 @@ define(function(require) {
 
 	var BookEditView = Backbone.View.extend({
 		events: {
-			'click #cancel': 'cancel',
+			'click .star': 'toggleStarred',
+			'click .cancel': 'cancel',
 			'submit': 'save'
 		},
 		initialize: function(options) {
 			if (!this.model) {
 				this.model = new Book();
 			}
+			this.starred = this.model.get('isStarred');
 			this.render();
 		},
 		render: function() {
@@ -21,26 +23,37 @@ define(function(require) {
 			this.$el.html(
 				'<form> \
 				    <fieldset> \
-						<input type="text" name="title" class="title" value="' + (this.model.get('title') || '') + '"> \
-						<input type="text" name="author" class="author" value="' + (this.model.get('author') || '') + '"> \
-						<input type="checkbox" name="isAvailable" class="inLibrary" value="isAvailable"' + (this.model.get('libraryInfo').get('isAvailable') ? 'checked' : '') + '> \
-						<input type="text" name="section" class="librarySection" value="' + (this.model.get('libraryInfo').get('section') || '') + '"> \
+				    	<button class="star ' + (this.starred ? 'starred' : 'unstarred') + '"></button>\
+						<input type="text" name="title" class="title" value="' + (this.model.get('title') || '') + '">\
+						<input type="text" name="author" class="author" value="' + (this.model.get('author') || '') + '">\
+						<input type="checkbox" name="isAvailable" class="inLibrary" value="isAvailable"' + (this.model.get('libraryInfo').get('isAvailable') ? 'checked' : '') + '>\
+						<input type="text" name="section" class="librarySection" value="' + (this.model.get('libraryInfo').get('section') || '') + '">\
 						<!-- Allow form submission with keyboard without duplicating the dialog button --> \
 						<!-- <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> --> \
-						<button class="submit">save</button> \
 						<button class="cancel">cancel</button> \
+						<button class="submit">save</button> \
 				    </fieldset> \
 				  </form>'
 			);
 		},
+		toggleStarred: function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+
+			this.starred = !this.starred;
+			this.render();
+		},
 		cancel: function(e) {
 			e.preventDefault();
-			
+			e.stopPropagation();
+
 			this.trigger('cancelled');
 		},
 		save: function(e) {
 			e.preventDefault();
+			e.stopPropagation();
 
+			this.model.set('isStarred', this.starred);
 			this.model.set('title', this.valueForInput('title'));
 			this.model.set('author', this.valueForInput('author'));
 

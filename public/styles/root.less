@@ -11,6 +11,16 @@
 @lightBackground: #f5f5f5;
 @lightHoverBackground: darken(@lightBackground, 3%);
 
+@containerWidth: 960px;
+
+@rowPadding: 10px;
+@starWidth: 30px;
+@titleWidth: 425px;
+@authorWidth: 225px;
+@inLibraryWidth: 70px;
+@librarySectionWidth: 100px;
+@modifyWidth: 90px;
+
 html {
 	font-family: 'Source Sans Pro', sans-serif;
 }
@@ -21,6 +31,12 @@ a {
 	&:hover {
 		color: @linkHoverColor;
 	}
+}
+
+/* Statuse */
+
+.noLinkHover {
+	color: @linkColor;
 }
 
 .delete {
@@ -37,12 +53,36 @@ a {
 	}
 }
 
-.noLinkHover {
-	color: @linkColor;
+.editing {
+	background-color: @lightHoverBackground;
+}
+
+.starred, .unstarred {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+}
+
+.starred {
+	background-image: url(../images/star_gold.png);
+	background-repeat: no-repeat;
+}
+
+.unstarred {
+	background-image: url(../images/star_grey.png);
+	background-repeat: no-repeat;
+}
+
+.checkmark {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background-image: url(../images/checkmark.png);
+	background-repeat: no-repeat;
 }
 
 #content {
-	width: 960px;
+	width: @containerWidth;
 	margin: 0 auto;
 	position: relative;
 }
@@ -55,6 +95,10 @@ a {
 	top: 10px;
 }
 
+input[type=text] {
+	border: 1px solid #bbb;
+}
+
 input[type=text].search {
 	width: 100%;
 	padding: 10px;
@@ -63,12 +107,9 @@ input[type=text].search {
 	border-radius: 4px;
 }
 
-input[type=text] {
-	border: 1px solid #bbb;
-}
-
 #actions {
 	position: relative;
+	font-size: 0.8em;
 }
 
 #filters  {
@@ -102,9 +143,15 @@ input[type=text] {
 
 /* Add/edit form */
 
+#add.editing {
+	padding: @rowPadding;
+}
+
 form {
+	@formPadding: 6px;
+
 	font-size: 0.9em;
-	margin-top: 10px;
+	// margin-top: 7px;
 
 	fieldset {
 		border: 0;
@@ -128,6 +175,31 @@ form {
 			color: @linkHoverColor;
 		}
 	}
+
+	.star {
+		width: @starWidth - @formPadding;
+	}
+
+	.title {
+		width: @titleWidth - @formPadding;
+	}
+
+	.author {
+		width: @authorWidth - @formPadding;
+	}
+
+	.inLibrary {
+		width: @inLibraryWidth - @formPadding;
+		height: 15px;
+	}
+
+	.librarySection {
+		width: @librarySectionWidth - @formPadding;
+	}
+
+	.modify {
+		width: @modifyWidth - @formPadding;
+	}
 }
 
 /* Book list */
@@ -144,42 +216,20 @@ form {
 	}
 }
 
-.book {
-	position: relative;
-	padding: 10px;
+.header-row {
+	font-style: italic;
+}
 
-	&:hover {
-		.hoverBackground;
-	}
+.book:hover {
+	.hoverBackground;
+}
+
+.book, .header-row {
+	position: relative;
+	padding: @rowPadding;
 
 	div {
 		display: inline-block;
-		// width: 200px;
-	}
-
-	.star {
-		width: 30px;
-	}
-
-	.title {
-		width: 400px;
-	}
-
-	.author {
-		width: 200px;
-	}
-
-	.inLibrary {
-		width: 30px;
-		height: 15px;
-	}
-
-	.librarySection {
-		width: 100px;
-	}
-
-	.modify {
-		width: 100px;
 	}
 
 	.expanded {
@@ -188,23 +238,36 @@ form {
 		margin-top: 5px;
 		padding-left: 30px;
 	}
+
+	.editView {
+		position: absolute;
+		top: 7px;
+		left: @rowPadding;
+		.editing;
+	}
 }
 
-.starred, .unstarred {
-	display: inline-block;
-	width: 15px;
+.star {
+	width: @starWidth;
+}
+
+.title {
+	width: @titleWidth;
+}
+
+.author {
+	width: @authorWidth;
+}
+
+.inLibrary {
+	width: @inLibraryWidth;
 	height: 15px;
 }
 
-.starred {
-	background-image: url(../images/star_gold.png);
+.librarySection {
+	width: @librarySectionWidth;
 }
 
-.unstarred {
-	background-image: url(../images/star_grey.png);
-}
-
-.checkmark {
-	background-image: url(../images/checkmark.png);
-	background-repeat: no-repeat;
+.modify {
+	width: @modifyWidth;
 }

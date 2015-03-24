@@ -12,7 +12,7 @@ define(function(require) {
 			return this.renderCollection(this.collection);
 		},
 		renderCollection: function(collection) {
-			this.$el.empty();
+			this.$('.book').remove();
 			this.childViews = [];
 			var sorted = _(collection.sortBy(function(book) {
 				return book.sortString();
