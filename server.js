@@ -1,6 +1,5 @@
 var express = require('express');
 var session = require('express-session')
-var hbs = require('hbs')
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
@@ -21,8 +20,6 @@ var baseUrl = config.httpServer.baseUrl;
 
 var app = express();
 app.disable('x-powered-by');
-app.set('view engine', 'html');
-app.engine('html', hbs.__express);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -107,11 +104,11 @@ var auth = function(req, notAuthenticatedCallback, notAuthorizedCallback, nextCa
 // Routes 
 
 app.get('/', webAuth, function(req, res) {
-	res.render('root', req.user);
+	res.sendFile(__dirname + '/views/root.html');
 });
 
 app.get('/login', function(req, res) {
-	res.render('login');
+	res.sendFile(__dirname + '/views/login.html');
 });
 
 app.get('/logout', function(req, res){

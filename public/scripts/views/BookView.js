@@ -2,8 +2,15 @@ define(function(require) {
 	var Backbone = require('lib/backbone');
 	var BookEditView = require('./BookEditView');
 
+	_.templateSettings = {
+		interpolate : /{{([\s\S]+?)}}/g,
+		evaluate: /{{(.+?)}}/g
+	};
+
 	var BookView = Backbone.View.extend({
 		tagName: 'div',
+		className: 'book',
+		template: _.template($('#book-view-template').html()),
 		events: {
 			'click .star': 'toggleStarred',
 			'click .edit': 'edit',
@@ -17,16 +24,10 @@ define(function(require) {
 		},
 		render: function() {
 			this.$el.empty();
-			this.$el.addClass('book');
 
-			this.$el.append('<div class="star"><a href="#" class="' + (this.model.get('isStarred') ? 'starred' : 'unstarred') + '"></a></div>');
-			this.$el.append('<div class="title">' + this.model.get('title') + '</div>');
-			this.$el.append('<div class="author">' + this.model.get('author') + '</div>');
-			this.$el.append('<div class="inLibrary"><span class="' + (this.model.get('libraryInfo').get('isAvailable') ? 'checkmark' : '') + '"></span></div>');
-			this.$el.append('<div class="librarySection">' + this.model.get('libraryInfo').get('section') + '</div>');
-			this.$el.append('<div class="modify"><a href="#" class="edit">edit</a> | <a href="#" class="delete">delete</a></div>');
-			this.$el.append('<div class="editView"></div>');
-			this.$el.append('<div class="expanded"></div>');
+			this.$el.html(this.template(
+				this.model.toJSON()
+			));
 
 			this.detailView = new BookDetailView({model: this.model, el: this.$('.expanded')});
 			this.detailView.$el.toggle(this.expanded);
@@ -72,14 +73,19 @@ define(function(require) {
 	});
 
 	var BookDetailView = Backbone.View.extend({
+		template: _.template($('#book-detail-view-template').html()),
 		initialize: function(options) {
 			this.model.on('change', this.render, this);
 			this.render();
 		},
 		render: function() {
-			this.$el.append('<a href="' + this.model.amazonUrl() + '">Amazon</a> | ');
-			this.$el.append('<a href="' + this.model.goodreadsUrl() + '">Goodreads</a> | ');
-			this.$el.append('<a href="' + this.model.libraryUrl() + '">Library</a>');
+			this.$el.html(this.template({
+				amazon: this.model.amazonUrl(),
+				goodreads: this.model.goodreadsUrl(),
+				library: this.model.libraryUrl()
+			}));
+
+			return this;
 		}
 	});
 

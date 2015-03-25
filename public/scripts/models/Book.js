@@ -8,6 +8,7 @@ define(function(require) {
 		urlRoot: 'http://localhost:8080/api/books',
 		defaults: function() {
 			return {
+				'isStarred': false,
 				'libraryInfo': new LibraryInfo({name: 'Library'})
 			};
 		},

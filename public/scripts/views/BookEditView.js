@@ -2,7 +2,14 @@ define(function(require) {
 	var Backbone = require('lib/backbone');
 	var Book = require('models/Book');
 
+	// TODO: Duplicated from BookView.js
+	_.templateSettings = {
+		interpolate : /{{([\s\S]+?)}}/g,
+		evaluate: /{{(.+?)}}/g
+	};
+
 	var BookEditView = Backbone.View.extend({
+		template: _.template($('#book-edit-view-template').html()),
 		events: {
 			'click .star': 'toggleStarred',
 			'click .cancel': 'cancel',
@@ -16,25 +23,11 @@ define(function(require) {
 			this.render();
 		},
 		render: function() {
-			// <label for="title">Title</label> \
-			// <label for="author">Author</label> \
-			// <label for="isAvailable">Available at library?</label> \
-			// <label for="section">Section</label> \
-			this.$el.html(
-				'<form> \
-				    <fieldset> \
-				    	<button class="star ' + (this.starred ? 'starred' : 'unstarred') + '"></button>\
-						<input type="text" name="title" class="title" value="' + (this.model.get('title') || '') + '">\
-						<input type="text" name="author" class="author" value="' + (this.model.get('author') || '') + '">\
-						<input type="checkbox" name="isAvailable" class="inLibrary" value="isAvailable"' + (this.model.get('libraryInfo').get('isAvailable') ? 'checked' : '') + '>\
-						<input type="text" name="section" class="librarySection" value="' + (this.model.get('libraryInfo').get('section') || '') + '">\
-						<!-- Allow form submission with keyboard without duplicating the dialog button --> \
-						<!-- <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"> --> \
-						<button class="cancel">cancel</button> \
-						<button class="submit">save</button> \
-				    </fieldset> \
-				  </form>'
-			);
+			this.$el.html(this.template(
+				_.assign(this.model.toJSON(), {'starred': this.starred})
+			));
+
+			return this;
 		},
 		toggleStarred: function(e) {
 			e.preventDefault();

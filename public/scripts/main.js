@@ -7,9 +7,7 @@ requirejs.config({
 });
 
 define(function(require) {
-	var jquery = require('jquery');
 	var Book = require('models/Book');
-	var LibraryInfo = require('models/LibraryInfo');
 	var RootView = require('views/RootView');
 
 	var bookList = new Book.collection();
@@ -19,5 +17,4 @@ define(function(require) {
 		collection: bookList,
 		el: $('#content')
 	});
-
 });
