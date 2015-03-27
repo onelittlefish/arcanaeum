@@ -24,6 +24,8 @@ define(function(require) {
 				el: $('.books')
 			});
 
+			this.editEl = this.$('#add td');
+
 			this.render();
 
 			this.listenTo(this.collection, 'filter', this.renderFiltered);
@@ -41,29 +43,31 @@ define(function(require) {
 				}
 				var newBook = new Book({title: title, author: author});
 
-				this.$('#add').html('<div></div>');
-				this.$('#add').addClass('editing');
-				
-				this.editView = new BookEditView({model: newBook, el: this.$('#add div')});
-				
-				this.listenTo(this.editView, 'cancelled', this.editCancelled);
-				this.listenTo(this.editView, 'saved', this.editSaved);
+				this.showEditView(newBook);
 			} else {
-				this.$('#add').empty();
-				this.$('#add').removeClass('editing');
+				this.hideEditView();
 			}
 		},
-		editCancelled: function() {
-			this.editView.remove();
+		showEditView: function(model) {
+			this.editEl.addClass('editing');
+			
+			this.editView = new BookEditView({model: model, el: this.editEl});
+			
+			this.listenTo(this.editView, 'cancelled', this.editCancelled);
+			this.listenTo(this.editView, 'saved', this.editSaved);
+		},
+		hideEditView: function() {
 			this.editView = null;
-			this.$('#add').removeClass('editing');
+			this.editEl.empty();
+			this.editEl.removeClass('editing');
+		},
+		editCancelled: function() {
+			this.hideEditView();
 		},
 		editSaved: function() {
 			this.collection.add(this.editView.model);
 			
-			this.editView.remove();
-			this.editView = null;
-			this.$('#add').removeClass('editing');
+			this.hideEditView();
 
 			this.searchFilterView.clearSearchValue();
 		},

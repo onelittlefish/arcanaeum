@@ -14,15 +14,19 @@
 @containerWidth: 960px;
 
 @rowPadding: 10px;
-@starWidth: 30px;
+@starWidth: 24px;
 @titleWidth: 425px;
 @authorWidth: 225px;
 @inLibraryWidth: 70px;
 @librarySectionWidth: 100px;
-@modifyWidth: 90px;
+@modifyWidth: 80px;
 
 html {
 	font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+	font-weight: normal;
 }
 
 a {
@@ -33,7 +37,7 @@ a {
 	}
 }
 
-/* Statuse */
+/* Statuses */
 
 .noLinkHover {
 	color: @linkColor;
@@ -143,15 +147,10 @@ input[type=text].search {
 
 /* Add/edit form */
 
-#add.editing {
-	padding: @rowPadding;
-}
-
 form {
-	@formPadding: 6px;
+	@formPadding: 3px;
 
 	font-size: 0.9em;
-	// margin-top: 7px;
 
 	fieldset {
 		border: 0;
@@ -161,7 +160,7 @@ form {
 
 	input[type=text] {
 		padding: 4px;
-		font-size: 0.9em;
+		font-size: 1em;
 		box-sizing: border-box;
 	}
 
@@ -178,6 +177,8 @@ form {
 
 	.star {
 		width: @starWidth - @formPadding;
+		margin: 0;
+		padding: 0;
 	}
 
 	.title {
@@ -202,50 +203,61 @@ form {
 	}
 }
 
-/* Book list */
+/* Book table */
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th {
+	text-align: left;
+	font-weight: normal;
+	font-style: italic;
+}
+
+tr {
+	position: relative;
+	padding: @rowPadding;
+	display: flex;
+	flex-wrap: wrap;
+
+	td {
+		display: inline-block;
+	}
+}
 
 .hoverBackground {
 	cursor: pointer;
 	background-color: @lightHoverBackground;
 }
 
-.books .book:nth-child(even) {
+.books .book:nth-child(odd) {
 	background-color: @lightBackground;
 	&:hover {
 		.hoverBackground;
 	}
 }
 
-.header-row {
-	font-style: italic;
-}
-
 .book:hover {
 	.hoverBackground;
 }
 
-.book, .header-row {
-	position: relative;
-	padding: @rowPadding;
-
-	div {
-		display: inline-block;
+#add {
+	padding: 0;
+	.editing;
+	td {
+		padding: 0;
+		&.editing {
+			padding: 10px 0 10px 10px;
+		}
 	}
-
-	.expanded {
-		display: block;
-		width: 100%;
-		margin-top: 5px;
-		padding-left: 30px;
-	}
-
-	.editView {
-		position: absolute;
-		top: 7px;
-		left: @rowPadding;
-		.editing;
+	form {
+		@formPadding: 4px;
 	}
 }
+
+/* Row cells */
 
 .star {
 	width: @starWidth;
@@ -270,4 +282,21 @@ form {
 
 .modify {
 	width: @modifyWidth;
+}
+
+.book {
+
+	.expanded {
+		display: block;
+		width: 100%;
+		margin-top: 5px;
+		padding-left: 30px;
+	}
+
+	.editView {
+		position: absolute;
+		top: 7px;
+		left: @rowPadding;
+		.editing;
+	}
 }

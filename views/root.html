@@ -37,28 +37,30 @@
 		        </div>
 	        </div>
 
-			    <div class="books">
-			    	<div class="header-row">
-			    		<div class="star"></div>
-			    		<div class="title">Title</div>
-			    		<div class="author">Author</div>
-			    		<div class="inLibrary">@ Library</div>
-			    		<div class="librarySection">Section</div>
-			    	</div>
-			        <div id="add"></div>
-			    </div>
-		    </div>
+		    <table class="books">
+		    	<tr class="header-row">
+		    		<th class="star"></th>
+		    		<th class="title">Title</th>
+		    		<th class="author">Author</th>
+		    		<th class="inLibrary">@ Library</th>
+		    		<th class="librarySection">Section</th>
+		    		<th class="modify"></th>
+		    	</tr>
+		        <tr id="add">
+		        	<td></td>
+		        </tr>
+		    </table>
 	    </div>
 
 	    <script type="text/template" id="book-view-template">
-		    <div class="star"><a href="#" class="{{ isStarred ? 'starred' : 'unstarred' }}"></a></div>
-			<div class="title">{{ title }}</div>
-			<div class="author">{{ author }}</div>
-			<div class="inLibrary"><span class="{{ libraryInfo.get('isAvailable') ? 'checkmark' : '' }}"></span></div>
-			<div class="librarySection">{{ libraryInfo.get('section') }}</div>
-			<div class="modify"><a href="#" class="edit">edit</a> | <a href="#" class="delete">delete</a></div>
-			<div class="editView"></div>
-			<div class="expanded"></div>
+		    <td class="star"><a href="#" class="{{ isStarred ? 'starred' : 'unstarred' }}"></a></td>
+			<td class="title">{{ title }}</td>
+			<td class="author">{{ author }}</td>
+			<td class="inLibrary"><span class="{{ libraryInfo.get('isAvailable') ? 'checkmark' : '' }}"></span></td>
+			<td class="librarySection">{{ libraryInfo.get('section') }}</td>
+			<td class="modify"><a href="#" class="edit">edit</a> | <a href="#" class="delete">delete</a></td>
+			<td class="editView"></td>
+			<td class="expanded"></td>
 	    </script>
 
 	    <script type="text/template" id="book-detail-view-template">
@@ -71,14 +73,14 @@
 		    <form>
 			    <fieldset>
 			    	<button class="star {{ starred ? 'starred' : 'unstarred' }}"></button>
-					<input type="text" name="title" class="title" value="{{ title }}">
-					<input type="text" name="author" class="author" value="{{ author }}">
+					<input type="text" name="title" class="title" placeholder="Title" value="{{ title }}">
+					<input type="text" name="author" class="author" placeholder="Author" value="{{ author }}">
 					<input type="checkbox" name="isAvailable" class="inLibrary" value="isAvailable" {{ libraryInfo.get('isAvailable') ? 'checked' : ''}}>
-					<input type="text" name="section" class="librarySection" value="{{ libraryInfo.get('section') }}">
+					<input type="text" name="section" class="librarySection" placeholder="Section" value="{{ libraryInfo.get('section') }}">
 					<button class="cancel">cancel</button>
 					<button class="submit">save</button>
 			    </fieldset>
-		  </form>
+			</form>
 	    </script>
 
     </body>

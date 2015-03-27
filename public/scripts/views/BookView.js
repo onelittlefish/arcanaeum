@@ -8,7 +8,7 @@ define(function(require) {
 	};
 
 	var BookView = Backbone.View.extend({
-		tagName: 'div',
+		tagName: 'tr',
 		className: 'book',
 		template: _.template($('#book-view-template').html()),
 		events: {
