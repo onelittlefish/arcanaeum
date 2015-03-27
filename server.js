@@ -8,6 +8,7 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var config = require('./config.json')
 var lessMiddleware = require('less-middleware');
+var _ = require('lodash');
 
 var Book = require('./app/models/Book');
 var User = require('./app/models/User');
@@ -183,6 +184,36 @@ router.route('/books/:book_id')
 			res.json(book);
 		});
 	});
+
+router.use('/books.csv', auth, function(req, res, next) {
+	Book.find(function(err, books) {
+		if (err) {
+			console.log("error: " + err);
+			res.send(err);
+		}
+
+		res.type('csv');
+		res.send(csvForBooks(books));
+	});
+});
+
+var csvForBooks = function(books) {
+	console.log(books);
+	return "title,author,library,section,starred\r\n"
+			+ books.map(function(book){
+				return [
+					_escapeCsvString(book.title),
+					_escapeCsvString(book.author),
+					_escapeCsvString(book.libraryInfo.isAvailable ? "yes" : "no"),
+					_escapeCsvString(book.libraryInfo.section),
+					_escapeCsvString(book.isStarred ? "yes" : "no")
+				].join(",");
+			}).join('\r\n');
+}
+
+var _escapeCsvString = function(str){
+	return (_.isString(str)) ? '"'+str.replace(/"/g, '""')+'"' : "";
+}
 
 app.use('/api', router);
 
