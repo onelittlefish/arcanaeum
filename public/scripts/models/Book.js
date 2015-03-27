@@ -1,6 +1,6 @@
 define(function(require) {
 	var Backbone = require('lib/backbone');
-	var LibraryInfo = require('./libraryInfo');
+	var LibraryInfo = require('./LibraryInfo');
 
 	var Book = Backbone.Model.extend({
 		// title, author, isStarred, libraryInfo
@@ -8,29 +8,21 @@ define(function(require) {
 		urlRoot: 'http://localhost:8080/api/books',
 		defaults: function() {
 			return {
+				'title': null,
+				'author': null,
 				'isStarred': false,
 				'libraryInfo': new LibraryInfo({name: 'Library'})
 			};
 		},
-		summary: function() {
-			var title = this.get('title');
-			var author = this.get('author');
-			var bookString = "";
-			if (title && author) {
-				bookString = title + " - " + author;
-			} else if (title) {
-				bookString = title;
-			} else if (author) {
-				bookString = author;
-			}
-			return bookString;
-		},
 		sortString: function() {
+			var title = this.get('title');
 			var author = this.get('author');
 			if (author) {
 				return author.toLowerCase().split(' ').pop();
+			} else if (title) {
+				return title.toLowerCase();
 			} else {
-				return this.get('title').toLowerCase();
+				return '';
 			}
 		},
 		searchString: function() {

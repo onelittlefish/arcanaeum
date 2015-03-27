@@ -24,8 +24,6 @@ define(function(require) {
 				el: $('.books')
 			});
 
-			this.editEl = this.$('#add td');
-
 			this.render();
 
 			this.listenTo(this.collection, 'filter', this.renderFiltered);
@@ -49,17 +47,17 @@ define(function(require) {
 			}
 		},
 		showEditView: function(model) {
-			this.editEl.addClass('editing');
+			this.$('#add').html('<td></td>')
+			this.$('#add td').addClass('editing');
 			
-			this.editView = new BookEditView({model: model, el: this.editEl});
+			this.editView = new BookEditView({model: model, el: this.$('#add td')});
 			
 			this.listenTo(this.editView, 'cancelled', this.editCancelled);
 			this.listenTo(this.editView, 'saved', this.editSaved);
 		},
 		hideEditView: function() {
+			this.editView.remove();
 			this.editView = null;
-			this.editEl.empty();
-			this.editEl.removeClass('editing');
 		},
 		editCancelled: function() {
 			this.hideEditView();

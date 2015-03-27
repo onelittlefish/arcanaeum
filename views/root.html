@@ -55,8 +55,8 @@
 
 	    <script type="text/template" id="book-view-template">
 		    <td class="star"><a href="#" class="{{ isStarred ? 'starred' : 'unstarred' }}"></a></td>
-			<td class="title">{{ title }}</td>
-			<td class="author">{{ author }}</td>
+			<td class="title">{{ title || '' }}</td>
+			<td class="author">{{ author || '' }}</td>
 			<td class="inLibrary"><span class="{{ libraryInfo.get('isAvailable') ? 'checkmark' : '' }}"></span></td>
 			<td class="librarySection">{{ libraryInfo.get('section') }}</td>
 			<td class="modify"><a href="#" class="edit">edit</a> | <a href="#" class="delete">delete</a></td>
