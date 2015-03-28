@@ -3,13 +3,16 @@ define(function(require) {
 	var jquery = require('jquery');
 
 	var Book = require('models/Book');
+	var User = require('models/User');
 
 	var SearchFilterView = require('./SearchFilterView');
 	var BookListView = require('./BookListView');
 	var BookEditView = require('./BookEditView');
+	var SettingsView = require('./SettingsView');
 
 	var RootView = Backbone.View.extend({
 		events: {
+			'click #settings-link': 'showSettings',
 			'click #expand-all': 'expandAll',
 			'click #collapse-all': 'collapseAll'
 		},
@@ -45,6 +48,18 @@ define(function(require) {
 			} else {
 				this.hideEditView();
 			}
+		},
+		showSettings: function() {
+			this.$('#settings').html('<div></div>');
+
+			this.settingsView = new SettingsView({model: User, el: this.$('#settings div')});
+
+			this.listenTo(this.settingsView, 'cancelled', this.hideSettings);
+			this.listenTo(this.settingsView, 'saved', this.hideSettings);
+		},
+		hideSettings: function() {
+			this.settingsView.remove();
+			this.settingsView = null;
 		},
 		showEditView: function(model) {
 			this.$('#add').html('<td></td>')

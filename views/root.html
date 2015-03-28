@@ -12,10 +12,12 @@
 
         <div id="content">
 	        <div id="logout">
-	        	<a href="/logout">Log Out</a>
+	        	<a href="#" id="settings-link">Settings</a> | <a href="/logout">Log Out</a>
 	        </div>
 
 	        <h1>Arcanaeum</h1>
+
+	        <div id="settings"></div>
 
 	        <div id="search-filter">
 			    <input type="text" name="input" class="search" placeholder="Title or author...">
@@ -67,7 +69,7 @@
 	    <script type="text/template" id="book-detail-view-template">
 		    <a href="{{ amazon }}">Amazon</a> |
 			<a href="{{ goodreads }}">Goodreads</a> |
-			<a href="{{ library }}">Library</a
+			<a href="{{ library }}" class="library">Library</a>
 	    </script>
 
 	    <script type="text/template" id="book-edit-view-template">
@@ -78,6 +80,19 @@
 					<input type="text" name="author" class="author" placeholder="Author" value="{{ author }}">
 					<input type="checkbox" name="isAvailable" class="inLibrary" value="isAvailable" {{ libraryInfo.get('isAvailable') ? 'checked' : ''}}>
 					<input type="text" name="section" class="librarySection" placeholder="Section" value="{{ libraryInfo.get('section') }}">
+					<button class="cancel">cancel</button>
+					<button class="submit">save</button>
+			    </fieldset>
+			</form>
+	    </script>
+
+	    <script type="text/template" id="settings-view-template">
+		    <form>
+			    <fieldset>
+			    	<label>
+			    		Library Search URL
+						<input type="text" name="librarySearchUrl" placeholder="Library Search URL" value="{{ librarySearchUrl }}">
+					</label>
 					<button class="cancel">cancel</button>
 					<button class="submit">save</button>
 			    </fieldset>

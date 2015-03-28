@@ -1,6 +1,7 @@
 define(function(require) {
-	var Backbone = require('lib/backbone');
+	var Backbone     = require('lib/backbone');
 	var BookEditView = require('./BookEditView');
+	var User         = require('models/User');
 
 	_.templateSettings = {
 		interpolate : /{{([\s\S]+?)}}/g,
@@ -29,17 +30,21 @@ define(function(require) {
 				this.model.toJSON()
 			));
 
-			this.detailView = new BookDetailView({model: this.model, el: this.$('.expanded')});
-			this.detailView.$el.toggle(this.expanded);
-
 			return this;
 		},
 		toggleExpanded: function() {
 			if (this.editView) {
 				return;
 			}
+
 			this.expanded = !this.expanded;
-			this.render();
+
+			if (this.expanded) {
+				this.$('.expanded').html('<div></div>');
+				this.detailView = new BookDetailView({model: this.model, el: this.$('.expanded div')});
+			} else if (this.detailView) {
+				this.detailView.remove();
+			}
 		},
 		toggleStarred: function(e) {
 			e.stopPropagation();
@@ -79,11 +84,17 @@ define(function(require) {
 			this.render();
 		},
 		render: function() {
+			var libraryUrl = this.model.libraryUrl(User.get('librarySearchUrl'));
+
 			this.$el.html(this.template({
 				amazon: this.model.amazonUrl(),
 				goodreads: this.model.goodreadsUrl(),
-				library: this.model.libraryUrl()
+				library: libraryUrl
 			}));
+
+			if (!libraryUrl) {
+				this.$('.library').hide();
+			}
 
 			return this;
 		}

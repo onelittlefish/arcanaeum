@@ -1,6 +1,6 @@
 var app    = require('../app');
 var auth   = require('../auth/auth');
-var router = require('./bookRoutes');
+var router = require('./apiRoutes');
 
 require('../auth/routes');
 

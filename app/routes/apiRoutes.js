@@ -3,6 +3,7 @@ var auth        = require('../auth/auth');
 var Book        = require('../models/Book');
 var bookService = require('../services/bookService');
 var express     = require('express');
+var User        = require('../models/User');
 
 var router = module.exports = express.Router();
 
@@ -14,6 +15,28 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res) {
 	res.json({ message: 'Hello.' });
 });
+
+// User
+
+router.route('/user')
+	.all(auth.apiAuth)
+	.get(function(req, res) {
+		res.json(req.user);
+	});
+
+router.route('/user/:user_id')
+	.all(auth.apiAuth)
+	.put(function(req, res) {
+		User.findByIdAndUpdate(req.params.user_id, req.body, function(err, user) {
+			if (err) {
+				console.log("error: " + err);
+				res.send(err);
+			}
+			res.json(user);
+		});
+	});
+
+// Books
 
 router.route('/books')
 	.all(auth.apiAuth)
