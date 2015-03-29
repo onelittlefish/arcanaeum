@@ -4,7 +4,7 @@ define(function(require) {
 	var User = Backbone.Model.extend({
 		// email, librarySearchUrl
 		idAttribute: '_id',
-		urlRoot: 'http://localhost:8080/api/user',
+		urlRoot: '/api/user',
 		defaults: {
 			'librarySearchUrl': null
 		}

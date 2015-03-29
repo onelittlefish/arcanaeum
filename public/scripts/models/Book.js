@@ -5,7 +5,7 @@ define(function(require) {
 	var Book = Backbone.Model.extend({
 		// title, author, isStarred, libraryInfo
 		idAttribute: '_id',
-		urlRoot: 'http://localhost:8080/api/books',
+		urlRoot: '/api/books',
 		defaults: function() {
 			return {
 				'title': null,
@@ -47,7 +47,7 @@ define(function(require) {
 
 	var BookList = Backbone.Collection.extend({
 		model: Book,
-		url: 'http://localhost:8080/api/books',
+		url: '/api/books',
 		search: function(query) {
 		    this.searchFunction = function(book) {
 				var title = book.get('title');
