@@ -47,6 +47,7 @@ define(function(require) {
 			}
 		},
 		toggleStarred: function(e) {
+			e.preventDefault();
 			e.stopPropagation();
 
 			this.model.set('isStarred', !this.model.get('isStarred'));
