@@ -34,7 +34,9 @@ define(function(require) {
 			e.stopPropagation();
 
 			this.starred = !this.starred;
-			this.render();
+
+			this.$('.star').toggleClass('starred', this.starred);
+			this.$('.star').toggleClass('unstarred', !this.starred);
 		},
 		cancel: function(e) {
 			e.preventDefault();
