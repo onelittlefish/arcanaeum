@@ -79,6 +79,9 @@ define(function(require) {
 
 	var BookDetailView = Backbone.View.extend({
 		template: _.template($('#book-detail-view-template').html()),
+		events: {
+			'click': 'clicked'
+		},
 		initialize: function(options) {
 			this.model.on('change', this.render, this);
 			this.render();
@@ -97,6 +100,10 @@ define(function(require) {
 			}
 
 			return this;
+		},
+		clicked: function(e) {
+			// Don't trigger expand/collapse on row
+			e.stopPropagation();
 		}
 	});
 
