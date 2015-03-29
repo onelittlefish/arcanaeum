@@ -71,8 +71,10 @@ define(function(require) {
 			this.listenTo(this.editView, 'saved', this.editSaved);
 		},
 		hideEditView: function() {
-			this.editView.remove();
-			this.editView = null;
+			if (this.editView) {
+				this.editView.remove();
+				this.editView = null;
+			}
 		},
 		editCancelled: function() {
 			this.hideEditView();
