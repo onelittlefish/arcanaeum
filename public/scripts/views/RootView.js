@@ -62,10 +62,10 @@ define(function(require) {
 			this.settingsView = null;
 		},
 		showEditView: function(model) {
-			this.$('#add').html('<td></td>')
-			this.$('#add td').addClass('editing');
+			this.$('#add').html('<div></div>')
+			this.$('#add div').addClass('editing');
 			
-			this.editView = new BookEditView({model: model, el: this.$('#add td')});
+			this.editView = new BookEditView({model: model, el: this.$('#add div')});
 			
 			this.listenTo(this.editView, 'cancelled', this.editCancelled);
 			this.listenTo(this.editView, 'saved', this.editSaved);

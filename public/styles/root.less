@@ -15,7 +15,7 @@
 
 @rowPadding: 10px;
 @starWidth: 24px;
-@titleWidth: 425px;
+@titleWidth: 424px;
 @authorWidth: 225px;
 @inLibraryWidth: 70px;
 @librarySectionWidth: 100px;
@@ -211,29 +211,7 @@ form {
 	}
 }
 
-/* Book table */
-
-table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-th {
-	text-align: left;
-	font-weight: normal;
-	font-style: italic;
-}
-
-tr {
-	position: relative;
-	padding: @rowPadding;
-	display: flex;
-	flex-wrap: wrap;
-
-	td {
-		display: inline-block;
-	}
-}
+/* Book list */
 
 .hoverBackground {
 	cursor: pointer;
@@ -247,6 +225,18 @@ tr {
 	}
 }
 
+.book, .header-row {
+	position: relative;
+	padding: @rowPadding;
+	div {
+		display: inline-block;;
+	}
+}
+
+.header-row {
+	font-style: italic;
+}
+
 .book:hover {
 	.hoverBackground;
 }
@@ -254,7 +244,7 @@ tr {
 #add {
 	padding: 0;
 	.editing;
-	td {
+	div {
 		padding: 0;
 		&.editing {
 			padding: 10px 0 10px 10px;
@@ -265,7 +255,7 @@ tr {
 	}
 }
 
-/* Row cells */
+/* Row divs */
 
 .star {
 	width: @starWidth;
@@ -293,10 +283,8 @@ tr {
 }
 
 .book {
-
 	.expanded {
 		display: block;
-		width: 100%;
 		padding-left: 30px;
 		div {
 			margin-top: 5px;
