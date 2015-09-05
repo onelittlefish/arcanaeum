@@ -21,12 +21,28 @@
 @librarySectionWidth: 100px;
 @modifyWidth: 80px;
 
+.compact(@rules) {
+	@media (max-device-width: @containerWidth) { @rules(); }
+}
+
+.regular(@rules) {
+	@media (min-device-width: @containerWidth) { @rules(); }
+}
+
 html {
 	font-family: 'Source Sans Pro', sans-serif;
+	.compact({
+		font-size: 2em;
+	});
 }
 
 h1 {
 	font-weight: normal;
+	font-size: 2em;
+	.compact({
+		font-size: 4em;
+		text-align: center;
+	});
 }
 
 a {
@@ -86,17 +102,33 @@ a {
 }
 
 #content {
-	width: @containerWidth;
-	margin: 0 auto;
+	.regular({
+		width: @containerWidth;
+		margin: 0 auto;
+	});
 	position: relative;
 }
 
 /* Header */
 
+#login {
+	.compact({
+		text-align: center;
+		font-size: 3em;
+	});
+}
+
 #logout {
-	position: absolute;
-	right: 0;
-	top: 10px;
+	.regular({
+		position: absolute;
+		right: 0;
+		top: 10px;
+	});
+	.compact({
+		margin-right: 20px;
+		text-align: right;
+		font-size: 2em;
+	});
 }
 
 #settings {
@@ -116,12 +148,18 @@ input[type=text].search {
 	padding: 10px;
 	box-sizing: border-box;
 	font-size: 1em;
+	.compact({
+		font-size: 2em;
+	});
 	border-radius: 4px;
 }
 
 #actions {
 	position: relative;
 	font-size: 0.8em;
+	.compact({
+		font-size: 1.6em;
+	});
 }
 
 #filters  {
@@ -144,9 +182,11 @@ input[type=text].search {
 }
 
 #expand-collapse {
-	position: absolute;
-	right: 0;
-	bottom: 0;
+	.regular({
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	});
 
 	a {
 		margin: 5px 0 5px 10px;
@@ -159,6 +199,9 @@ form {
 	@formPadding: 3px;
 
 	font-size: 0.9em;
+	.compact({
+		font-size: 1.8em;
+	});
 
 	fieldset {
 		border: 0;
@@ -169,6 +212,9 @@ form {
 	input[type=text] {
 		padding: 4px;
 		font-size: 1em;
+		.compact({
+			font-size: 2em;
+		});
 		box-sizing: border-box;
 	}
 
@@ -177,6 +223,9 @@ form {
 		background-color: transparent;;
 		color: @linkColor;
 		font-size: 0.9em;
+		.compact({
+			font-size: 1.8em;
+		});
 		cursor: pointer;
 		&:hover {
 			color: @linkHoverColor;
@@ -214,8 +263,10 @@ form {
 /* Book list */
 
 .hoverBackground {
-	cursor: pointer;
-	background-color: @lightHoverBackground;
+	.regular({
+		cursor: pointer;
+		background-color: @lightHoverBackground;
+	});
 }
 
 .books .book:nth-child(odd) {
@@ -229,12 +280,18 @@ form {
 	position: relative;
 	padding: @rowPadding;
 	div {
-		display: inline-block;;
+		display: inline-block;
+		.compact({
+			display: block;
+		});
 	}
 }
 
 .header-row {
 	font-style: italic;
+	.compact({
+		display: none;
+	});
 }
 
 .book:hover {
@@ -257,46 +314,70 @@ form {
 
 /* Row divs */
 
-.star {
-	width: @starWidth;
-}
+.regular({
+	.star {
+		width: @starWidth;
+	}
 
-.title {
-	width: @titleWidth;
-}
+	.title {
+		width: @titleWidth;
+	}
 
-.author {
-	width: @authorWidth;
-}
+	.author {
+		width: @authorWidth;
+	}
 
-.inLibrary {
-	width: @inLibraryWidth;
-	height: 15px;
-}
+	.inLibrary {
+		width: @inLibraryWidth;
+		height: 15px;
+	}
 
-.librarySection {
-	width: @librarySectionWidth;
-}
+	.librarySection {
+		width: @librarySectionWidth;
+	}
 
-.modify {
-	width: @modifyWidth;
-}
+	.modify {
+		width: @modifyWidth;
+	}
+});
+
+.compact({
+	.title {
+		font-weight: bold;
+	}
+});
 
 .book {
-	.modify {
-		display: none;
-	}
+	.regular({
+		.modify {
+			display: none;
+		}
 
-	&:hover .modify {
-		display: inline-block;
-	}
+		&:hover .modify {
+			display: inline-block;
+		}
+	});
+
+	.compact({
+		.modify {
+			font-size: 0.5em;
+			&.collapsed {
+				display: none;
+			}
+		}
+	});
 
 	.expanded {
-		display: block;
-		padding-left: 30px;
 		div {
 			margin-top: 5px;
 		}
+		.regular({
+			display: block;
+			padding-left: 30px;
+		});
+		.compact({
+			font-size: 0.5em;
+		});
 	}
 
 	.editView {

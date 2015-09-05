@@ -30,6 +30,10 @@ define(function(require) {
 				this.model.toJSON()
 			));
 
+			this.$('.expanded').html('<div></div>');
+			this.detailView = new BookDetailView({model: this.model, el: this.$('.expanded div')});
+			this.expand(this.expanded);
+
 			return this;
 		},
 		toggleExpanded: function() {
@@ -37,14 +41,7 @@ define(function(require) {
 				return;
 			}
 
-			this.expanded = !this.expanded;
-
-			if (this.expanded) {
-				this.$('.expanded').html('<div></div>');
-				this.detailView = new BookDetailView({model: this.model, el: this.$('.expanded div')});
-			} else if (this.detailView) {
-				this.detailView.remove();
-			}
+			this.expand(!this.expanded);
 		},
 		toggleStarred: function(e) {
 			e.preventDefault();
@@ -55,7 +52,14 @@ define(function(require) {
 		},
 		expand: function(shouldExpand) {
 			this.expanded = shouldExpand;
-			this.render();
+
+			if (this.expanded) {
+				this.detailView.$el.show();
+				this.$('.modify').removeClass("collapsed");
+			} else if (this.detailView) {
+				this.detailView.$el.hide();
+				this.$('.modify').addClass("collapsed");
+			}
 		},
 		edit: function(e) {
 			e.preventDefault();
