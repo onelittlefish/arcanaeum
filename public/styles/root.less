@@ -31,16 +31,12 @@
 
 html {
 	font-family: 'Source Sans Pro', sans-serif;
-	.compact({
-		font-size: 2em;
-	});
 }
 
 h1 {
 	font-weight: normal;
 	font-size: 2em;
 	.compact({
-		font-size: 4em;
 		text-align: center;
 	});
 }
@@ -114,7 +110,6 @@ a {
 #login {
 	.compact({
 		text-align: center;
-		font-size: 3em;
 	});
 }
 
@@ -125,17 +120,16 @@ a {
 		top: 10px;
 	});
 	.compact({
-		margin-right: 20px;
 		text-align: right;
-		font-size: 2em;
 	});
 }
 
 #settings {
+	background-color: @lightBackground;
 	margin: 20px 0;
+	padding: 10px;
 	input[type=text] {
-		width: 600px;
-		margin: 0 10px;
+		width: 100%;
 	}
 }
 
@@ -148,18 +142,12 @@ input[type=text].search {
 	padding: 10px;
 	box-sizing: border-box;
 	font-size: 1em;
-	.compact({
-		font-size: 2em;
-	});
 	border-radius: 4px;
 }
 
 #actions {
 	position: relative;
 	font-size: 0.8em;
-	.compact({
-		font-size: 1.6em;
-	});
 }
 
 #filters  {
@@ -167,6 +155,9 @@ input[type=text].search {
 		display: inline-block;
 		background-color: @lightBackground;
 		padding: 5px 10px;
+		.compact({
+			padding: 5px;
+		});
 		margin: 0 4px;
 	}
 
@@ -189,7 +180,12 @@ input[type=text].search {
 	});
 
 	a {
-		margin: 5px 0 5px 10px;
+		.regular({
+			margin: 5px 0 5px 10px;
+		});
+		.compact({
+			margin-right: 5px;
+		});
 	}
 }
 
@@ -199,9 +195,6 @@ form {
 	@formPadding: 3px;
 
 	font-size: 0.9em;
-	.compact({
-		font-size: 1.8em;
-	});
 
 	fieldset {
 		border: 0;
@@ -212,10 +205,11 @@ form {
 	input[type=text] {
 		padding: 4px;
 		font-size: 1em;
-		.compact({
-			font-size: 2em;
-		});
 		box-sizing: border-box;
+		.compact({
+			display: block;
+			width: 100%;
+		});
 	}
 
 	button {
@@ -223,14 +217,13 @@ form {
 		background-color: transparent;;
 		color: @linkColor;
 		font-size: 0.9em;
-		.compact({
-			font-size: 1.8em;
-		});
 		cursor: pointer;
 		&:hover {
 			color: @linkHoverColor;
 		}
 	}
+
+	.regular({
 
 	.star {
 		width: @starWidth - @formPadding;
@@ -258,6 +251,7 @@ form {
 	.modify {
 		width: @modifyWidth - @formPadding;
 	}
+	});
 }
 
 /* Book list */
@@ -305,6 +299,9 @@ form {
 		padding: 0;
 		&.editing {
 			padding: 10px 0 10px 10px;
+			.compact({
+				padding: 10px;
+			});
 		}
 	}
 	form {
@@ -343,7 +340,7 @@ form {
 
 .compact({
 	.title {
-		font-weight: bold;
+		font-style: italic;
 	}
 });
 
@@ -352,15 +349,12 @@ form {
 		.modify {
 			display: none;
 		}
-
 		&:hover .modify {
 			display: inline-block;
 		}
 	});
-
 	.compact({
 		.modify {
-			font-size: 0.5em;
 			&.collapsed {
 				display: none;
 			}
@@ -375,15 +369,14 @@ form {
 			display: block;
 			padding-left: 30px;
 		});
-		.compact({
-			font-size: 0.5em;
-		});
 	}
 
 	.editView {
-		position: absolute;
-		top: 7px;
-		left: @rowPadding;
+		.regular({
+			position: absolute;
+			top: 7px;
+			left: @rowPadding;
+		});
 		.editing;
 	}
 }

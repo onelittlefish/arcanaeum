@@ -32,6 +32,15 @@ define(function(require) {
 			this.listenTo(this.collection, 'filter', this.renderFiltered);
 		},
 		render: function() {
+			// Set up settings
+			this.hideSettings();
+			this.$('#settings').html('<div></div>');
+
+			this.settingsView = new SettingsView({model: User, el: this.$('#settings div')});
+
+			this.listenTo(this.settingsView, 'cancelled', this.hideSettings);
+			this.listenTo(this.settingsView, 'saved', this.hideSettings);
+
 			return this;
 		},
 		renderFiltered: function(filtered) {
@@ -50,16 +59,10 @@ define(function(require) {
 			}
 		},
 		showSettings: function() {
-			this.$('#settings').html('<div></div>');
-
-			this.settingsView = new SettingsView({model: User, el: this.$('#settings div')});
-
-			this.listenTo(this.settingsView, 'cancelled', this.hideSettings);
-			this.listenTo(this.settingsView, 'saved', this.hideSettings);
+			this.$('#settings').show();
 		},
 		hideSettings: function() {
-			this.settingsView.remove();
-			this.settingsView = null;
+			this.$('#settings').hide();
 		},
 		showEditView: function(model) {
 			this.$('#add').html('<div></div>')
