@@ -1,0 +1,66 @@
+@import "variables.less";
+@import "statuses.less";
+
+/* Add/edit form */
+
+form {
+	@formPadding: 3px;
+
+	font-size: 0.9em;
+
+	fieldset {
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	input[type=text] {
+		padding: 4px;
+		font-size: 1em;
+		box-sizing: border-box;
+		.compact({
+			display: block;
+			width: 100%;
+		});
+	}
+
+	button {
+		border: 0;
+		background-color: transparent;;
+		color: @linkColor;
+		font-size: 0.9em;
+		cursor: pointer;
+		&:hover {
+			color: @linkHoverColor;
+		}
+	}
+
+	.regular({
+		.star {
+			width: @starWidth - @formPadding;
+			margin: 0;
+			padding: 0;
+		}
+
+		.title {
+			width: @titleWidth - @formPadding;
+		}
+
+		.author {
+			width: @authorWidth - @formPadding;
+		}
+
+		.inLibrary {
+			width: @inLibraryWidth - @formPadding;
+			height: 15px;
+		}
+
+		.librarySection {
+			width: @librarySectionWidth - @formPadding;
+		}
+
+		.modify {
+			width: @modifyWidth - @formPadding;
+		}
+	});
+}

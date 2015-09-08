@@ -1,0 +1,30 @@
+@linkColor: #267ADA;
+@linkHoverColor: #489DFF;
+@linkBorderColor: #26ade4;
+
+@deleteColor: #DF5555;
+@deleteHoverColor: #EA7E7E;
+
+@cancelColor: #939393;
+@cancelHoverColor: darken(@cancelColor, 20%);
+
+@lightBackground: #f5f5f5;
+@lightHoverBackground: darken(@lightBackground, 3%);
+
+@containerWidth: 960px;
+
+@rowPadding: 10px;
+@starWidth: 24px;
+@titleWidth: 424px;
+@authorWidth: 225px;
+@inLibraryWidth: 70px;
+@librarySectionWidth: 100px;
+@modifyWidth: 80px;
+
+.compact(@rules) {
+	@media (max-device-width: @containerWidth) { @rules(); }
+}
+
+.regular(@rules) {
+	@media (min-device-width: @containerWidth) { @rules(); }
+}

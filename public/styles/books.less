@@ -1,0 +1,129 @@
+@import "variables.less";
+@import "statuses.less";
+
+/* Book list */
+
+.hoverBackground {
+	.regular({
+		cursor: pointer;
+		background-color: @lightHoverBackground;
+	});
+}
+
+.books .book:nth-child(odd) {
+	background-color: @lightBackground;
+	&:hover {
+		.hoverBackground;
+	}
+}
+
+.book, .header-row {
+	position: relative;
+	padding: @rowPadding;
+	div {
+		display: inline-block;
+		.compact({
+			display: block;
+		});
+	}
+}
+
+.header-row {
+	font-style: italic;
+	.compact({
+		display: none;
+	});
+}
+
+.book:hover {
+	.hoverBackground;
+}
+
+#add {
+	padding: 0;
+	.editing;
+	div {
+		padding: 0;
+		&.editing {
+			padding: 10px 0 10px 10px;
+			.compact({
+				padding: 10px;
+			});
+		}
+	}
+	form {
+		@formPadding: 4px;
+	}
+}
+
+/* Row divs */
+
+.regular({
+	.star {
+		width: @starWidth;
+	}
+
+	.title {
+		width: @titleWidth;
+	}
+
+	.author {
+		width: @authorWidth;
+	}
+
+	.inLibrary {
+		width: @inLibraryWidth;
+		height: 15px;
+	}
+
+	.librarySection {
+		width: @librarySectionWidth;
+	}
+
+	.modify {
+		width: @modifyWidth;
+	}
+});
+
+.compact({
+	.title {
+		font-style: italic;
+	}
+});
+
+.book {
+	.regular({
+		.modify {
+			display: none;
+		}
+		&:hover .modify {
+			display: inline-block;
+		}
+	});
+	.compact({
+		.modify {
+			&.collapsed {
+				display: none;
+			}
+		}
+	});
+
+	.expanded {
+		div {
+			margin-top: 5px;
+		}
+		.regular({
+			display: block;
+			padding-left: 30px;
+		});
+	}
+
+	.editView {
+		.regular({
+			position: absolute;
+			top: 7px;
+			left: @rowPadding;
+		});
+		.editing;
+	}
+}

@@ -1,0 +1,47 @@
+/* Statuses */
+
+.noLinkHover {
+	color: @linkColor;
+}
+
+.delete {
+	color: @deleteColor;
+	&:hover {
+		color: @deleteHoverColor;
+	}
+}
+
+.cancel {
+	color: @cancelColor;
+	&:hover {
+		color: @cancelHoverColor;
+	}
+}
+
+.editing {
+	background-color: @lightHoverBackground !important;
+}
+
+.starred, .unstarred {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+}
+
+.starred {
+	background-image: url(../images/star_gold.png);
+	background-repeat: no-repeat;
+}
+
+.unstarred {
+	background-image: url(../images/star_grey.png);
+	background-repeat: no-repeat;
+}
+
+.checkmark {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background-image: url(../images/checkmark.png);
+	background-repeat: no-repeat;
+}
