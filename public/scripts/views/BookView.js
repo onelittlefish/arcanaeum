@@ -76,7 +76,9 @@ define(function(require) {
 			this.$el.removeClass('editing');
 		},
 		delete: function(e) {
+			e.preventDefault();
 			e.stopPropagation();
+			
 			this.model.destroy();
 			this.remove();
 		}
