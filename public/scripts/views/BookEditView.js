@@ -1,5 +1,5 @@
 define(function(require) {
-	var Backbone = require('lib/backbone');
+	var Backbone = require('backbone');
 	var Book = require('models/Book');
 
 	// TODO: Duplicated from BookView.js

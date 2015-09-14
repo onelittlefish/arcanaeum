@@ -1,5 +1,5 @@
 define(function(require) {
-	var Backbone = require('lib/backbone');
+	var Backbone = require('backbone');
 	var LibraryInfo = require('./LibraryInfo');
 
 	var Book = Backbone.Model.extend({
@@ -48,6 +48,9 @@ define(function(require) {
 	var BookList = Backbone.Collection.extend({
 		model: Book,
 		url: '/api/books',
+		comparator: function(book) {
+			return book.sortString();
+		},
 		search: function(query) {
 		    this.searchFunction = function(book) {
 				var title = book.get('title');

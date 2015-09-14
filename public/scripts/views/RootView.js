@@ -1,5 +1,5 @@
 define(function(require) {
-	var Backbone = require('lib/backbone');
+	var Backbone = require('backbone');
 	var jquery = require('jquery');
 
 	var Book = require('models/Book');

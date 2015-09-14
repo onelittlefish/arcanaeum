@@ -1,5 +1,5 @@
 define(function(require) {
-	var Backbone     = require('lib/backbone');
+	var Backbone     = require('backbone');
 	var BookEditView = require('./BookEditView');
 	var User         = require('models/User');
 
@@ -78,7 +78,7 @@ define(function(require) {
 		delete: function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			
+
 			this.model.destroy();
 			this.remove();
 		}

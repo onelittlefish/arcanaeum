@@ -1,6 +1,6 @@
 requirejs.config({
 	paths: {
-		'backbone'   : 'lib/backbone',
+		'backbone'   : 'lib/backbone-1.2.3.min',
 		'underscore' : 'lib/lodash',
 		'jquery'     : 'lib/jquery-2.1.1.min'
 	}
@@ -12,7 +12,7 @@ define(function(require) {
 	var RootView = require('views/RootView');
 
 	var bookList = new Book.collection();
-	bookList.fetch();
+	bookList.fetch({reset: true});
 
 	User.fetch();
 
