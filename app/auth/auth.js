@@ -15,9 +15,10 @@ passport.use(new GoogleStrategy({
 	passReqToCallback: true
 	},
 	function(req, accessToken, refreshToken, profile, done) {
+		console.log("authenticated");
 		var email = profile.emails[0].value;
 		User.findOne({ email: email }, function(err, user) {
-			done(null, user);
+			done(err, user);
 		});
 	}
 ));
