@@ -3,7 +3,8 @@ define(function(require) {
 
 	var SearchFilterView = Backbone.View.extend({
 		events: {
-			'keyup .search': 'search',
+			'keyup #search input': 'search',
+			'click #search button': 'clearSearchValue',
 			'click #filters #all': 'filterAll',
 			'click #filters #starred': 'filterStarred',
 			'click #filters #library': 'filterLibrary',
@@ -14,6 +15,10 @@ define(function(require) {
 			this.filterAll();
 		},
 		render: function() {
+			this.searchInput = this.$('#search input');
+			this.searchClearButton = this.$('#search button');
+			this.updateSearchClearButtonVisibility();
+
 			return this;
 		},
 		search: function(event) {
@@ -23,13 +28,24 @@ define(function(require) {
 			}
 			var query = this.searchValue();
 			this.collection.search(query);
+
+			this.updateSearchClearButtonVisibility();
 		},
 		searchValue: function() {
-			return this.$('.search').val().trim()
+			return this.searchInput.val().trim()
 		},
 		clearSearchValue: function(value) {
-			this.$('.search').val('');
+			this.searchInput.val('');
 			this.collection.clearSearch();
+
+			this.updateSearchClearButtonVisibility();
+		},
+		updateSearchClearButtonVisibility: function() {
+			if (this.searchValue().length > 0) {
+				this.searchClearButton.show();
+			} else {
+				this.searchClearButton.hide();
+			}
 		},
 		filterAll: function() {
 			this.updateSelected('#filters #all');
