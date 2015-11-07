@@ -13,7 +13,7 @@ define(function(require) {
 		events: {
 			'click .star': 'toggleStarred',
 			'click .cancel': 'cancel',
-			'submit': 'save'
+			'submit': 'submit'
 		},
 		initialize: function(options) {
 			if (!this.model) {
@@ -44,10 +44,13 @@ define(function(require) {
 
 			this.trigger('cancelled');
 		},
-		save: function(e) {
+		submit: function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 
+			this.save();
+		},
+		save: function() {
 			this.model.set('isStarred', this.starred);
 			this.model.set('title', this.valueForInput('title'));
 			this.model.set('author', this.valueForInput('author'));

@@ -30,6 +30,7 @@ define(function(require) {
 			this.render();
 
 			this.listenTo(this.collection, 'filter', this.renderFiltered);
+			this.listenTo(this.searchFilterView, 'searchSubmitted', this.submitSearch);
 		},
 		render: function() {
 			// Set up settings
@@ -88,6 +89,11 @@ define(function(require) {
 			this.hideEditView();
 
 			this.searchFilterView.clearSearchValue();
+		},
+		submitSearch: function() {
+			if (this.editView) {
+				this.editView.save();
+			}
 		},
 		expandAll: function() {
 			this.bookListView.expandAll(true);

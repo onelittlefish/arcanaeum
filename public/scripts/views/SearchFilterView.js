@@ -16,8 +16,12 @@ define(function(require) {
 		render: function() {
 			return this;
 		},
-		search: function() {
-			var query = this.$('.search').val().trim();
+		search: function(event) {
+			if (event.keyCode == 13) { // enter key
+				this.trigger("searchSubmitted");
+				return;
+			}
+			var query = this.searchValue();
 			this.collection.search(query);
 		},
 		searchValue: function() {
