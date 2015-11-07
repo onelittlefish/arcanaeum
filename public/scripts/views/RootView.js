@@ -12,7 +12,7 @@ define(function(require) {
 
 	var RootView = Backbone.View.extend({
 		events: {
-			'click #settings-link': 'showSettings',
+			'click #settings-link': 'toggleSettings',
 			'click #expand-all': 'expandAll',
 			'click #collapse-all': 'collapseAll'
 		},
@@ -59,8 +59,8 @@ define(function(require) {
 				this.hideEditView();
 			}
 		},
-		showSettings: function() {
-			this.$('#settings').show();
+		toggleSettings: function() {
+			this.$('#settings').toggle();
 		},
 		hideSettings: function() {
 			this.$('#settings').hide();
