@@ -55,9 +55,10 @@ define(function(require) {
 			this.model.set('title', this.valueForInput('title'));
 			this.model.set('author', this.valueForInput('author'));
 
-			var libraryInfo = this.model.get('libraryInfo');
+			var libraryInfo = this.model.get('libraryInfo').clone();
 			libraryInfo.set('isAvailable', this.$('input[name="isAvailable"]').is(':checked'));
 			libraryInfo.set('section', this.valueForInput('section'));
+			this.model.set('libraryInfo', libraryInfo);
 
 			this.model.save();
 
