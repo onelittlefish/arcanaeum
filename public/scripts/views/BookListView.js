@@ -4,11 +4,14 @@ define(function(require) {
 
 	var BookListView = Backbone.View.extend({
 		initialize: function() {
+			this.listEl = this.$('#book-list');
 			this.childViews = [];
+			
 			this.collection.on('reset', this.reset, this);
 			this.collection.on('add', this.add, this);
 			this.collection.on('remove', this.remove, this);
 			this.listenTo(this.collection, 'filter', this.filter);
+
 			this.render();
 		},
 		render: function() {
@@ -19,7 +22,7 @@ define(function(require) {
 			this.childViews = [];
 			collection.each(_.bind(function(book) {
 				var bookView = new BookView({model: book});
-				this.$el.append(bookView.el);
+				this.listEl.append(bookView.el);
 				this.childViews.push(bookView);
 			}, this));
 
@@ -38,7 +41,7 @@ define(function(require) {
 			var index = collection.indexOf(model);
 			var bookView = new BookView({model: model});
 			if (index == 0) {
-				this.$el.prepend(bookView.el);
+				this.listEl.prepend(bookView.el);
 			} else {
 				var before = this.childViews[index - 1].$el;
 				before.after(bookView.el);
