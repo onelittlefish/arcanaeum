@@ -5,6 +5,7 @@ define(function(require) {
 		events: {
 			'keyup #search input': 'search',
 			'click #search button': 'clearSearchValue',
+			'submit #search': 'submitSearch',
 			'click #filters #all': 'filterAll',
 			'click #filters #starred': 'filterStarred',
 			'click #filters #library': 'filterLibrary',
@@ -21,11 +22,7 @@ define(function(require) {
 
 			return this;
 		},
-		search: function(event) {
-			if (event.keyCode == 13) { // enter key
-				this.trigger("searchSubmitted");
-				return;
-			}
+		search: function() {
 			var query = this.searchValue();
 			this.collection.search(query);
 
@@ -39,6 +36,10 @@ define(function(require) {
 			this.collection.clearSearch();
 
 			this.updateSearchClearButtonVisibility();
+		},
+		submitSearch: function(e) {
+			e.preventDefault();
+			this.trigger("searchSubmitted");
 		},
 		updateSearchClearButtonVisibility: function() {
 			if (this.searchValue().length > 0) {
