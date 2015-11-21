@@ -51,16 +51,16 @@ define(function(require) {
 			this.save();
 		},
 		save: function() {
-			this.model.set('isStarred', this.starred);
-			this.model.set('title', this.valueForInput('title'));
-			this.model.set('author', this.valueForInput('author'));
-
-			var libraryInfo = this.model.get('libraryInfo').clone();
+			var libraryInfo = this.model.get('libraryInfo');
 			libraryInfo.set('isAvailable', this.$('input[name="isAvailable"]').is(':checked'));
 			libraryInfo.set('section', this.valueForInput('section'));
-			this.model.set('libraryInfo', libraryInfo);
 
-			this.model.save();
+			this.model.save({
+				'isStarred': this.starred,
+				'title': this.valueForInput('title'),
+				'author': this.valueForInput('author'),
+				'libraryInfo': libraryInfo
+			});
 
 			this.trigger('saved');
 		},
