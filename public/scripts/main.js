@@ -1,6 +1,6 @@
 requirejs.config({
 	paths: {
-		'backbone'   : 'lib/backbone-1.2.3.min',
+		'backbone'   : 'lib/backbone-1.2.3',
 		'underscore' : 'lib/lodash',
 		'jquery'     : 'lib/jquery-2.1.1.min'
 	}
