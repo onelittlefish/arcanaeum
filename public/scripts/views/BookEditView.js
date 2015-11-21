@@ -51,7 +51,7 @@ define(function(require) {
 			this.save();
 		},
 		save: function() {
-			var libraryInfo = this.model.get('libraryInfo');
+			var libraryInfo = this.model.get('libraryInfo').clone();
 			libraryInfo.set('isAvailable', this.$('input[name="isAvailable"]').is(':checked'));
 			libraryInfo.set('section', this.valueForInput('section'));
 

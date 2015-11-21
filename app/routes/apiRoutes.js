@@ -71,7 +71,7 @@ router.route('/books/:book_id')
 		});
 	})
 	.put(function(req, res) {
-		Book.findByIdAndUpdate(req.params.book_id, req.body, function(err, book) {
+		Book.findByIdAndUpdate(req.params.book_id, req.body, {new: true}, function(err, book) {
 			if (err) {
 				console.log("error: " + err);
 				res.send(err);
