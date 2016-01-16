@@ -1,6 +1,5 @@
 define(function(require) {
 	var Backbone = require('backbone');
-	var jquery = require('jquery');
 
 	var Book = require('models/Book');
 	var User = require('models/User');
@@ -66,7 +65,7 @@ define(function(require) {
 			this.$('#settings').hide();
 		},
 		showEditView: function(model) {
-			this.$('#add').html('<div></div>')
+			this.$('#add').html('<div></div>');
 			this.$('#add div').addClass('editing');
 			
 			this.editView = new BookEditView({model: model, el: this.$('#add div')});

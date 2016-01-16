@@ -56,10 +56,10 @@ define(function(require) {
 			if (this.expanded) {
 				this.detailView.$el.show();
 				this.detailView.render();
-				this.$('.modify').removeClass("collapsed");
+				this.$('.modify').removeClass('collapsed');
 			} else if (this.detailView) {
 				this.detailView.$el.hide();
-				this.$('.modify').addClass("collapsed");
+				this.$('.modify').addClass('collapsed');
 			}
 		},
 		edit: function(e) {

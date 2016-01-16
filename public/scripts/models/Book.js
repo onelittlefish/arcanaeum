@@ -39,8 +39,8 @@ define(function(require) {
 			return librarySearchUrl ? librarySearchUrl.replace('<searchString>', this.searchString()) : null;
 		},
 		parse: function(response){
-            var libraryInfoData = response['libraryInfo'];
-            response['libraryInfo'] = new LibraryInfo(libraryInfoData);
+            var libraryInfoData = response.libraryInfo;
+            response.libraryInfo = new LibraryInfo(libraryInfoData);
 	        return response;
 	    }
 	});

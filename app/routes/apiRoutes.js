@@ -1,4 +1,3 @@
-var _           = require('lodash');
 var auth        = require('../auth/auth');
 var Book        = require('../models/Book');
 var bookService = require('../services/bookService');
@@ -29,7 +28,7 @@ router.route('/user/:user_id')
 	.put(function(req, res) {
 		User.findByIdAndUpdate(req.params.user_id, req.body, {new: true}, function(err, user) {
 			if (err) {
-				console.log("error: " + err);
+				console.log('error: ' + err);
 				res.send(err);
 			}
 			res.json(user);
@@ -43,7 +42,7 @@ router.route('/books')
 	.get(function(req, res) {
 		Book.find(function(err, books) {
 			if (err) {
-				console.log("error: " + err);
+				console.log('error: ' + err);
 				res.send(err);
 			}
 			res.json(books);
@@ -52,7 +51,7 @@ router.route('/books')
 	.post(function(req, res) {
 		Book.create(req.body, function(err, book) {
 			if (err) {
-				console.log("error: " + err);
+				console.log('error: ' + err);
 				res.send(err);
 			}
 			res.json(book);
@@ -64,7 +63,7 @@ router.route('/books/:book_id')
 	.get(function(req, res) {
 		Book.findById(req.params.book_id, function(err, book) {
 			if (err) {
-				console.log("error: " + err);
+				console.log('error: ' + err);
 				res.send(err);
 			}
 			res.json(book);
@@ -73,7 +72,7 @@ router.route('/books/:book_id')
 	.put(function(req, res) {
 		Book.findByIdAndUpdate(req.params.book_id, req.body, {new: true}, function(err, book) {
 			if (err) {
-				console.log("error: " + err);
+				console.log('error: ' + err);
 				res.send(err);
 			}
 			res.json(book);
@@ -82,7 +81,7 @@ router.route('/books/:book_id')
 	.delete(function(req, res) {
 		Book.findByIdAndRemove(req.params.book_id, function(err, book) {
 			if (err) {
-				console.log("error: " + err);
+				console.log('error: ' + err);
 				res.send(err);
 			}
 			res.json(book);
@@ -92,7 +91,7 @@ router.route('/books/:book_id')
 router.use('/books.csv', auth.apiAuth, function(req, res, next) {
 	bookService.booksAsCSV(function(err, csv) {
 		if (err) {
-			console.log("error: " + err);
+			console.log('error: ' + err);
 			res.send(err);
 		}
 

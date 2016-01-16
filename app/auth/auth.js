@@ -1,4 +1,3 @@
-var app            = require('../app');
 var config         = require('../../config.json');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var passport       = require('passport');
@@ -15,7 +14,7 @@ passport.use(new GoogleStrategy({
 	passReqToCallback: true
 	},
 	function(req, accessToken, refreshToken, profile, done) {
-		console.log("authenticated");
+		console.log('authenticated');
 		var email = profile.emails[0].value;
 		User.findOne({ email: email }, function(err, user) {
 			done(err, user);
@@ -40,7 +39,7 @@ var webAuth = function(req, res, next) {
 		req.logout();
 		res.redirect('/login');
 	}, next);
-}
+};
 
 var apiAuth = function(req, res, next) {
 	auth(req, function() {
@@ -48,22 +47,22 @@ var apiAuth = function(req, res, next) {
 	}, function() {
 		res.sendStatus(403);
 	}, next);
-}
+};
 
 var auth = function(req, notAuthenticatedCallback, notAuthorizedCallback, nextCallback) {
 	var isAuthenticated = req.isAuthenticated();
 	var isAuthorized = isAuthenticated && req.user;
 
 	if(!isAuthenticated){
-		console.log("not authenticated");
+		console.log('not authenticated');
 		notAuthorizedCallback();
 	} else if(!isAuthorized){
-		console.log("not authorized");
+		console.log('not authorized');
 		notAuthorizedCallback();
 	} else {
 		nextCallback();
 	}
-}
+};
 
 module.exports.webAuth = webAuth;
 module.exports.apiAuth = apiAuth;

@@ -29,7 +29,7 @@ define(function(require) {
 			this.updateSearchClearButtonVisibility();
 		},
 		searchValue: function() {
-			return this.searchInput.val().trim()
+			return this.searchInput.val().trim();
 		},
 		clearSearchValue: function(value) {
 			this.searchInput.val('');
@@ -39,7 +39,7 @@ define(function(require) {
 		},
 		submitSearch: function(e) {
 			e.preventDefault();
-			this.trigger("searchSubmitted");
+			this.trigger('searchSubmitted');
 		},
 		updateSearchClearButtonVisibility: function() {
 			if (this.searchValue().length > 0) {

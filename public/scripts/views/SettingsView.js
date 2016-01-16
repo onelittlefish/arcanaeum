@@ -1,6 +1,5 @@
 define(function(require) {
 	var Backbone = require('backbone');
-	var User = require('models/User');
 
 	// TODO: Duplicated from BookView.js
 	_.templateSettings = {
