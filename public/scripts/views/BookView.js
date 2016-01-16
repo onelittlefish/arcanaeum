@@ -55,6 +55,7 @@ define(function(require) {
 
 			if (this.expanded) {
 				this.detailView.$el.show();
+				this.detailView.render();
 				this.$('.modify').removeClass("collapsed");
 			} else if (this.detailView) {
 				this.detailView.$el.hide();

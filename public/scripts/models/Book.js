@@ -36,7 +36,7 @@ define(function(require) {
 			return 'http://www.goodreads.com/search?query=' + this.searchString();
 		},
 		libraryUrl: function(librarySearchUrl) {
-			return librarySearchUrl ? (librarySearchUrl + this.searchString()) : null;
+			return librarySearchUrl ? librarySearchUrl.replace('<searchString>', this.searchString()) : null;
 		},
 		parse: function(response){
             var libraryInfoData = response['libraryInfo'];

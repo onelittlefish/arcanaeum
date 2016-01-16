@@ -27,7 +27,7 @@ router.route('/user')
 router.route('/user/:user_id')
 	.all(auth.apiAuth)
 	.put(function(req, res) {
-		User.findByIdAndUpdate(req.params.user_id, req.body, function(err, user) {
+		User.findByIdAndUpdate(req.params.user_id, req.body, {new: true}, function(err, user) {
 			if (err) {
 				console.log("error: " + err);
 				res.send(err);

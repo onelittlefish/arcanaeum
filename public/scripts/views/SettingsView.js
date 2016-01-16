@@ -15,6 +15,7 @@ define(function(require) {
 			'submit': 'save'
 		},
 		initialize: function(options) {
+			this.model.on('change', this.render, this);
 			this.render();
 		},
 		render: function() {
