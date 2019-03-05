@@ -11,11 +11,12 @@ passport.use(new GoogleStrategy({
 	clientID: config.auth.google.clientID,
 	clientSecret: config.auth.google.clientSecret,
 	callbackURL: baseUrl + '/auth/google/callback',
+	userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
 	passReqToCallback: true
 	},
 	function(req, accessToken, refreshToken, profile, done) {
 		console.log('authenticated');
-		var email = profile.emails[0].value;
+		var email = profile.email;
 		User.findOne({ email: email }, function(err, user) {
 			done(err, user);
 		});
