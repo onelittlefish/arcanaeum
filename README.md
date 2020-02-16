@@ -28,30 +28,25 @@
 
 ## Building and running
 
-### Server
+### Production
 
 ```
 mongod
-npm run build-backend
+npm run build-all
 npm run start-backend
 ```
 
-Development:
+### Server development
 
 ```
+mongod
 npm run watch-backend
 ```
 
-### Client
+### Client development
 
 ```
-npm build-frontend
-```
-
-Development:
-
-```
-npm watch-frontend
+npm run build-frontend
 ```
 
 ## Details

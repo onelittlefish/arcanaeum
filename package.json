@@ -16,9 +16,10 @@
     "test-backend": "jest --forceExit --coverage --verbose",
     "watch-test-backend": "npm run test -- --watchAll",
     "build-ts-backend": "cd backend && tsc",
-    "lint-backend": "cd backend && tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "lint-backend": "cd backend && tsc --noEmit && eslint \"**/*.{js,ts}\"",
     "build-frontend": "cd frontend && webpack --config webpack.config.js",
-    "watch-frontend": "cd frontend && webpack-dev-server --config webpack.config.js"
+    "watch-frontend": "cd frontend && webpack-dev-server --config webpack.config.js",
+    "build-all": "npm run build-backend && npm run build-frontend"
   },
   "author": "",
   "dependencies": {
