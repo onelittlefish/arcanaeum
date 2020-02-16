@@ -6,18 +6,14 @@ import { BookListUIManager } from "../book_list/BookListUIManager";
 export class BookViewModel implements BookEditViewModelParent {
   readonly book: Book
 
-  private index: number
-
   readonly bookManager: BookManager
   private bookListUIManager: BookListUIManager
 
   @observable isEditing = false
   @observable isExpanded = false
 
-  constructor(book: Book, index: number, bookManager: BookManager, bookListUIManager: BookListUIManager) {
+  constructor(book: Book, bookManager: BookManager, bookListUIManager: BookListUIManager) {
     this.book = book
-
-    this.index = index
 
     this.bookManager = bookManager
     this.bookListUIManager = bookListUIManager
@@ -32,10 +28,6 @@ export class BookViewModel implements BookEditViewModelParent {
   
   @computed get id() {
     return this.book.id
-  }
-
-  @computed get className() {
-    return this.index % 2 == 0 ? "book striped" : "book"
   }
 
   @computed get starClassName() {

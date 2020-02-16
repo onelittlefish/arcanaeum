@@ -9,7 +9,6 @@ import { ContainerAwareProps } from "../Container"
 
 interface Props extends ContainerAwareProps {
   book: Book
-  index: number
 }
 
 @observer
@@ -18,7 +17,7 @@ export class BookView extends React.Component<Props, {}> {
 
   constructor(props: Props) {
     super(props)
-    this.model = new BookViewModel(props.book, props.index, props.container.bookManager, props.container.bookListUIManager)
+    this.model = new BookViewModel(props.book, props.container.bookManager, props.container.bookListUIManager)
   }
 
   private onClickStar(event: React.SyntheticEvent<any, any>) {
@@ -42,7 +41,7 @@ export class BookView extends React.Component<Props, {}> {
 
   render() {
     return (
-      <div className={this.model.className} onClick={(event) => this.onClickRow(event) }>
+      <div className="book" onClick={(event) => this.onClickRow(event) }>
         <div className="star"><a href="#" className={this.model.starClassName} onClick={(event) => this.onClickStar(event)}></a></div>
         <div className="title">{this.model.title}</div>
         <div className="author">{this.model.author}</div>

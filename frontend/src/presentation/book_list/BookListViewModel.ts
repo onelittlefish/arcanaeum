@@ -11,9 +11,9 @@ export class BookListViewModel {
     this.bookListUIManager = bookListUIManager
   }
 
-  @computed get books(): [Book, number][] {
-    return this.bookManager.sortedBooks.map((book, index) => {
-      return [book, index]
+  @computed get books(): [Book, string][] {
+    return this.bookManager.sortedBooks.map((book) => {
+      return [book, book.id]
     })
   }
 }

@@ -15,8 +15,8 @@ export class BookListView extends React.Component<ContainerAwareProps, {}> {
   }
 
   render() {
-    const bookViews = this.model.books.map((bookAndIndex) => {
-      return <BookView book={bookAndIndex[0]} index={bookAndIndex[1]} key={bookAndIndex[1]} container={this.props.container} />
+    const bookViews = this.model.books.map((bookAndKey) => {
+      return <BookView book={bookAndKey[0]} key={bookAndKey[1]} container={this.props.container} />
     })
 
     return (
