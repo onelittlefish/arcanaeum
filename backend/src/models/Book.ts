@@ -1,4 +1,4 @@
-import * as mongoose from "mongoose";
+import * as mongoose from "mongoose"
 
 export type BookDocument = mongoose.Document & {
   title: string;
@@ -22,6 +22,6 @@ const bookSchema = new mongoose.Schema({
     isAvailable: Boolean,
     section: String
   }
-}, { timestamps: true });
+}, { timestamps: true })
 
-export const Book = mongoose.model<BookDocument>("Book", bookSchema);
+export const Book = mongoose.model<BookDocument>("Book", bookSchema)
