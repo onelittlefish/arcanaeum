@@ -21,6 +21,7 @@ export class BookView extends React.Component<Props, {}> {
   }
 
   private onClickStar(event: React.SyntheticEvent<any, any>) {
+    event.preventDefault()
     event.stopPropagation()
     this.model.onClickStar()
   }
@@ -30,11 +31,13 @@ export class BookView extends React.Component<Props, {}> {
   }
 
   private onEdit(event: React.SyntheticEvent<any, any>) {
+    event.preventDefault()
     event.stopPropagation()
     this.model.edit()
   }
 
   private onDelete(event: React.SyntheticEvent<any, any>) {
+    event.preventDefault()
     event.stopPropagation()
     this.model.delete()
   }
