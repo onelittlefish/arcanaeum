@@ -14,7 +14,7 @@ import { ContainerAwareProps } from './Container'
 export class RootView extends React.Component<ContainerAwareProps, {}> {
   render() {
     return (
-      <div>
+      <div id="content">
         <HeaderView container={this.props.container} />
 
         <h1>Arcanaeum</h1>
